@@ -18,13 +18,14 @@ public class MainSistemaEscola {
             System.out.println("4- Exibir média de um aluno");
             System.out.println("5- Sair");
 
-            int  opcao = scanner.nextInt();
+            int opcao = scanner.nextInt();
 
             switch (opcao) {
                 case 1:
                     System.out.println("Cadastrar novo aluno");
                     System.out.println("> Digite o nome do aluno: ");
-                    String nome = scanner.next();
+                    scanner.nextLine();
+                    String nome = scanner.nextLine();
                     System.out.println("> Digite a idade do aluno: ");
                     int idade = scanner.nextInt();
                     escola.cadastrarAluno(nome, idade);
@@ -32,7 +33,7 @@ public class MainSistemaEscola {
                 case 2:
                     System.out.println("-- CADASTRO DE NOTAS --");
                     if (escola.getAlunos().isEmpty()) {
-                        System.out.println("Sem alunos cadastrados. Digite 0 para voltar. ");
+                        System.out.println("Sem alunos cadastrados.");
                         break;
                     }
                     escola.listarAlunos();
@@ -49,7 +50,7 @@ public class MainSistemaEscola {
                     break;
                 case 3:
                     if (escola.getAlunos().isEmpty()) {
-                        System.out.println("Sem alunos cadastrados. Digite 0 para voltar. ");
+                        System.out.println("Sem alunos cadastrados.");
                         break;
                     }
                     escola.listarAlunos();
@@ -62,18 +63,17 @@ public class MainSistemaEscola {
                         System.out.println("Sem alunos cadastrados. Digite 0 para voltar. ");
                         break;
                     }
-                    System.out.println("Exibir média de um aluno");
                     escola.listarAlunos();
                     System.out.println("Qual aluno voce deseja verificar? ");
                     int alunoMedia = scanner.nextInt();
-                    Double media = escola.getAlunos().get(alunoMedia-1).calcularMedia(
-                            escola.getAlunos().get(alunoMedia-1).getNotas()
-                    );
+                    Aluninho aluno = escola.getAlunos().get(alunoMedia -1);
+                    Double media = aluno.calcularMedia(aluno.getNotas());
                     System.out.println(media);
                     break;
                 case 5:
                     System.out.println("Saindo...");
                     rodando = false;
+                    break;
                 default:
                     System.out.println("Opção invalida");
             }

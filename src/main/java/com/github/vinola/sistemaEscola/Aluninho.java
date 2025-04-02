@@ -34,6 +34,7 @@ public class Aluninho {
 
     public Double calcularMedia(ArrayList<Double> notas) {
         if (notas.isEmpty()) {
+            System.out.println("Aluno sem notas cadastradas.");
             return 0.0;
         }
 

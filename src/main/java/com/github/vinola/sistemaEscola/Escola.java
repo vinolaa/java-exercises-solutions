@@ -7,12 +7,17 @@ public class Escola {
     private ArrayList<Aluninho> alunos;
 
     public Escola() {
-        alunos = new ArrayList<>();
+        this.alunos = new ArrayList<>();
     }
 
     public ArrayList<Aluninho> getAlunos() {
         return alunos;
     }
+
+    /*
+    fun atualizarNota(listaDeNotas)
+    -> if listaDeNotas.size() == 0 -> sysout("A lista de notas deste aluno esta vazia.") return;
+     */
 
     public void cadastrarAluno(String nome, int idade) {
         Aluninho novoAluno = new Aluninho(nome, idade);
@@ -29,7 +34,7 @@ public class Escola {
 
     public void infosAluno(int id) {
         int index = id-1;
-        System.out.println("Aluno " + index);
+        System.out.println("Aluno " + index+1);
         System.out.println("Nome: " + alunos.get(index).getNome());
         System.out.println("Idade: " + alunos.get(index).getIdade());
         System.out.println("Notas: " + alunos.get(index).getNotas());
