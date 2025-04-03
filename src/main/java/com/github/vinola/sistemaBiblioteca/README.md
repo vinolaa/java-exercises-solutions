@@ -8,7 +8,7 @@ Os alunos devem criar um sistema onde livros podem ser cadastrados, emprestados 
 
 ## 📌 Requisitos
 
-<img src="diagramaClassesExercicioBiblioteca.png" alt"diagramaClasses">
+![Diagrama de Classes](diagramaClassesExercicioBiblioteca.png)
 
 ### **1. Classe `Livro`**
 Representa um livro da biblioteca.
