@@ -4,6 +4,7 @@ public class Personagem {
     private String name;
     private int forca;
     private int vida;
+    private int vitorias;
 
     public Personagem(String name, int forca) {
         this.name = name;
@@ -25,6 +26,15 @@ public class Personagem {
         this.vida -= dano;
     }
 
+    public void vencerLuta() {
+        this.vitorias += 1;
+    }
+
+    public void reviver() {
+        this.vida = 100;
+        System.out.println("Personagem " + this.name + " revivido com vida total!");
+    }
+
     public boolean estaVivo() {
         return vida > 0;
     }
@@ -39,5 +49,9 @@ public class Personagem {
 
     public int getVida() {
         return vida;
+    }
+
+    public int getVitorias() {
+        return vitorias;
     }
 }

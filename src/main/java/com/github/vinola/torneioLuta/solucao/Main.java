@@ -14,6 +14,9 @@ public class Main {
             System.out.println("1- Cadastrar personagem");
             System.out.println("2- Listar personagens");
             System.out.println("3- Simular luta");
+            System.out.println("4- Exibir rank de vitórias");
+            System.out.println("5- Reviver personagens mortos");
+            System.out.println("6- Mata-Mata");
             System.out.println("0 - Sair");
             int op = s.nextInt();
             switch (op) {
@@ -41,6 +44,29 @@ public class Main {
                             torneio.getPersonagens().get(p1-1),
                             torneio.getPersonagens().get(p2-1)
                     );
+                    break;
+                case 4:
+                    torneio.exibirRankVitorias();
+                    break;
+                case 5:
+                    if (torneio.getPersonagens().isEmpty()) {
+                        System.out.println("=-=-=-=-=- SEM PERSONAGENS CADASTRADOS -=-=-=-=");
+                        break;
+                    }
+
+                    if (torneio.getPersonagens().stream().allMatch(Personagem::estaVivo)) {
+                        System.out.println("Nenhum personagem morto.");
+                        break;
+                    }
+
+                    torneio.exibirPersonagensMortos();
+                    System.out.println("ESCOLHA O PERSONAGEM QUE DESEJA REVIVER: ");
+                    int reviver = s.nextInt();
+                    Personagem personagemReviver = torneio.getPersonagens().get(reviver-1);
+                    torneio.reviverPersonagem(personagemReviver);
+                    break;
+                case 6:
+                    torneio.iniciarTorneioAutomatico();
                     break;
                 case 0:
                     rodando = false;

@@ -12,9 +12,9 @@ public class NP {
     }
 
     public static void verficarNumeroPrimo(ArrayList<Integer> lista) {
-        for (int i = 0; i < lista.size(); i++) {
+        for (Integer integer : lista) {
             boolean isPrimo = true;
-            int numAnalise = lista.get(i);
+            int numAnalise = integer;
             if (numAnalise <= 1) {
                 isPrimo = false;
             }

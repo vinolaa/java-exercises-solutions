@@ -1,6 +1,8 @@
 package com.github.vinola.torneioLuta.solucao;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Torneio {
     private ArrayList<Personagem> personagens;
@@ -44,12 +46,84 @@ public class Torneio {
                 defensor = aux;
             } else {
                 vencedor = true;
+                atacante.vencerLuta();
                 System.out.println("Personagem vencedor: " +
                         atacante.getName() +
                         " -> Vida restante: "
-                        + atacante.getVida());
+                        + atacante.getVida() +
+                        " -> Vitórioas: "
+                        + atacante.getVitorias()
+                );
             }
         }
+    }
+
+    public void exibirRankVitorias() {
+        System.out.println("=-=-=-=-=- RANK DE VITORIAS -=-=-=-=");
+        List<Personagem> personagensComVitorias = personagens.stream()
+                .filter(personagem -> personagem.getVitorias() > 0)
+                .sorted((p1, p2) -> Integer.compare(p2.getVitorias(), p1.getVitorias()))
+                .toList();
+
+        if (this.personagens.isEmpty()) {
+            System.out.println("Nenhum personagem cadastrado.");
+            return;
+        }
+
+        if (personagensComVitorias.isEmpty()) {
+            System.out.println("Nenhum personagem com pelo menos 1 vitória.");
+            return;
+        }
+
+        for (Personagem personagem : personagensComVitorias) {
+            System.out.println("Nome: " + personagem.getName() + " - Vitorias: " + personagem.getVitorias());
+        }
+    }
+
+    public void exibirPersonagensMortos() {
+                System.out.println("=-=-=-=-=- PERSONAGENS MORTOS -=-=-=-=");
+        for (Personagem personagem : personagens) {
+            if (personagem.estaVivo()) {
+                continue;
+            }
+            System.out.println("PERSONAGEM NUMERO " + (personagens.indexOf(personagem) + 1));
+            System.out.println("Nome: " + personagem.getName());
+            System.out.println("-------------------------------------------------");
+        }
+    }
+
+    public void reviverPersonagem(Personagem personagem) {
+        personagem.reviver();
+    }
+
+    public void iniciarTorneioAutomatico() {
+        if (personagens.size() < 2) {
+            System.out.println("O torneio precisa de pelo menos 2 personagens para começar!");
+            return;
+        }
+
+        System.out.println("=-=-=-=-=- INICIANDO TORNEIO AUTOMÁTICO -=-=-=-=");
+
+        while (personagens.size() > 1) {
+            Collections.shuffle(personagens);
+
+            Personagem p1 = personagens.get(0);
+            Personagem p2 = personagens.get(1);
+
+            System.out.println("Luta entre: " + p1.getName() + " vs " + p2.getName());
+            simularLuta(p1, p2);
+
+            if (!p1.estaVivo()) {
+                personagens.remove(p1);
+            } else {
+                personagens.remove(p2);
+            }
+        }
+
+        Personagem campeao = personagens.get(0);
+        System.out.println("=-=-=-=-=- CAMPEÃO DO TORNEIO -=-=-=-=");
+        System.out.println("Nome: " + campeao.getName());
+        System.out.println("Vitórias: " + campeao.getVitorias());
     }
 
     public ArrayList<Personagem> getPersonagens() {
